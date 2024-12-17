@@ -48,6 +48,8 @@ def main():
                 st.session_state.num_columns -= 1
         
         st.subheader("Insert the parameter values below:")
+        M=Eta1=st.number_input("Insert the number of components:", min_value = 2, max_value=5, value = 2, help="The number of components must belong to the interval from 2 and 5. If this does not fulfill your need, contact us.")
+
         
         Eta1=st.number_input("Insert the characteristic life of the weak component (η\u2081)", min_value = 0.0, value = 3.0, help="This parameter specifies the scale parameter for the Weibull distribution, representing the defect arrival for the weaker component.")
         Beta1=st.number_input("Insert the shape parameter of the weak component (β\u2082)", min_value = 1.0, max_value=5.0, value = 2.5, help="This parameter specifies the shape parameter for the Weibull distribution, representing the defect arrival for the weaker component.")
