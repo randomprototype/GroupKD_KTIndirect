@@ -351,11 +351,19 @@ def main():
     if choice == menu[1]:
         st.header(menu[1])
         st.write("<h6 style='text-align: justify; color: Blue Jay;'>This app is designed to compute the cost rate and cost savings achieved through setup cost sharing in a hybrid inspection and age-based maintenance policy. We consider a multicomponent system where all components operate under Delay-Time Modeling (DTM).</h6>", unsafe_allow_html=True)
+        
         st.write("<h6 style='text-align: justify; color: Blue;'>Key features:</h6>", unsafe_allow_html=True)
         st.write("<h6 style='text-align: justify; color: Blue Jay; padding-left: 20px;'>Defect Arrival Distributions: Each component has a defect arrival distribution that reflects a mixture of weak and strong spare parts.</h6>", unsafe_allow_html=True)
         st.write("<h6 style='text-align: justify; color: Blue Jay; padding-left: 20px;'>Maintenance Actions: Component renovation occurs through corrective maintenance-triggered by failures- or preventive maintenance-performed during inspections when a defect is detected or when the age-based threshold is reached.</h6>", unsafe_allow_html=True)
         st.write("<h6 style='text-align: justify; color: Blue Jay; padding-left: 20px;'>Economic Dependence: Cost savings arise from setup cost sharing when multiple actions (inspections or age-based replacements) are executed simultaneously. In such cases, only the maximum setup cost is incurred for the group of actions, leading to savings.</h6>", unsafe_allow_html=True)
         st.write("<h6 style='text-align: justify; color: Blue Jay; padding-left: 20px;'>Infinite Horizon: Expected setup costs are computed over an infinite planning horizon.</h6>", unsafe_allow_html=True)
+        
+        st.write("<h6 style='text-align: justify; color: Blue;'>How the app works:</h6>", unsafe_allow_html=True)
+        st.write("<h6 style='text-align: justify; color: Blue Jay; padding-left: 20px;'>Policy:</h6>", unsafe_allow_html=True)
+        st.write("<h6 style='text-align: justify; color: Blue Jay; padding-left: 40px;'>The last action for each component is always age-based.</h6>", unsafe_allow_html=True)
+        st.write("<h6 style='text-align: justify; color: Blue Jay; padding-left: 40px;'>If only one action is specified, no inspections are performed for that component.</h6>", unsafe_allow_html=True)
+        st.write("<h6 style='text-align: justify; color: Blue Jay; padding-left: 40px;'>If two or more actions are specified, inspections occur as per the sequence provided.</h6>", unsafe_allow_html=True)
+        
         st.write("<h6 style='text-align: justify; color: Blue Jay;'>By exploring dependencies among components and grouping actions effectively, the app highlights opportunities to minimize long-term maintenance costs.</h6>", unsafe_allow_html=True)
         st.write("<h6 style='text-align: justify; color: Blue Jay;'>For further questions or assistance in finding the optimal solution of your problem, please contact us at:</h6>", unsafe_allow_html=True)
         
