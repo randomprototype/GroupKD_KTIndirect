@@ -360,9 +360,16 @@ def main():
         
         st.write("<h6 style='text-align: justify; color: Blue;'>How the app works:</h6>", unsafe_allow_html=True)
         st.write("<h6 style='text-align: justify; color: Blue Jay; padding-left: 20px;'>Policy:</h6>", unsafe_allow_html=True)
-        st.write("<h6 style='text-align: justify; color: Blue Jay; padding-left: 40px;'>The last action for each component is always age-based.</h6>", unsafe_allow_html=True)
+        st.write("<h6 style='text-align: justify; color: Blue Jay; padding-left: 40px;'>The last action for each component is always the age-based.</h6>", unsafe_allow_html=True)
         st.write("<h6 style='text-align: justify; color: Blue Jay; padding-left: 40px;'>If only one action is specified, no inspections are performed for that component.</h6>", unsafe_allow_html=True)
         st.write("<h6 style='text-align: justify; color: Blue Jay; padding-left: 40px;'>If two or more actions are specified, inspections occur as per the sequence provided.</h6>", unsafe_allow_html=True)
+
+        st.write("<h6 style='text-align: justify; color: Blue Jay; padding-left: 20px;'>User Input:</h6>", unsafe_allow_html=True)
+        st.write("<h6 style='text-align: justify; color: Blue Jay; padding-left: 40px;'>Specify the sequence of actions for each component, separated by spaces.</h6>", unsafe_allow_html=True)
+        st.write("<h6 style='text-align: justify; color: Blue Jay; padding-left: 40px;'>Actions occurring at the same time are grouped to share setup costs.</h6>", unsafe_allow_html=True)
+
+        st.write("<h6 style='text-align: justify; color: Blue Jay; padding-left: 20px;'>Cost Calculations:</h6>", unsafe_allow_html=True)
+        st.write("<h6 style='text-align: justify; color: Blue Jay; padding-left: 40px;'>The app computes the cost rate and cost savings for the given solution.</h6>", unsafe_allow_html=True)
         
         st.write("<h6 style='text-align: justify; color: Blue Jay;'>By exploring dependencies among components and grouping actions effectively, the app highlights opportunities to minimize long-term maintenance costs.</h6>", unsafe_allow_html=True)
         st.write("<h6 style='text-align: justify; color: Blue Jay;'>For further questions or assistance in finding the optimal solution of your problem, please contact us at:</h6>", unsafe_allow_html=True)
