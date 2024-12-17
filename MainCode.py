@@ -351,7 +351,7 @@ def main():
     if choice == menu[1]:
         st.header(menu[1])
         st.write("<h6 style='text-align: justify; color: Blue Jay;'>This app is designed to compute the cost rate and cost savings achieved through setup cost sharing in a hybrid inspection and age-based maintenance policy. We consider a multicomponent system where all components operate under Delay-Time Modeling (DTM).</h6>", unsafe_allow_html=True)
-        st.write("<h6 style='text-align: justify; color: Blue Jay;'> <strong>Key features: <strong> </h6>", unsafe_allow_html=True)
+        st.write("<h6 style='text-align: justify; color: Blue;'>Key features:</h6>", unsafe_allow_html=True)
         st.write("<h6 style='text-align: justify; color: Blue Jay;'>By exploring dependencies among components and grouping actions effectively, the app highlights opportunities to minimize long-term maintenance costs.</h6>", unsafe_allow_html=True)
         st.write("<h6 style='text-align: justify; color: Blue Jay;'>For further questions or assistance in finding the optimal solution of your problem, please contact us at:</h6>", unsafe_allow_html=True)
         
