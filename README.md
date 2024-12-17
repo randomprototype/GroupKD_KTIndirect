@@ -4,6 +4,6 @@ Welcome to the source code for our Streamlit application! This tool calculates t
 
 The application is designed to assist maintenance decision-makers by highlighting the benefits of grouping maintenance actions in hybrid policies, where inspections and age-based replacements can be jointly performed. By considering shared setup costs, this tool helps optimize maintenance schedules and reduce long-term costs.
 
-To access our app, please visit: 
+To access our app, please visit: https://groupkdktindirect-iejys9smnprj5fykxeq2lm.streamlit.app/
 
 Please note that the app may occasionally enter standby mode due to inactivity. If this happens, simply click "Yes, get this app back up!" to restart it.
