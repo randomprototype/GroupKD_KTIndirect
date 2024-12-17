@@ -28,7 +28,7 @@ def main():
     
     st.markdown("""
         <div style="background-color: #F3F3F3; padding: 10px; text-align: center;">
-          <p style="font-size: 20px; font-weight: bold;">A Delay-Time Model for Non-Periodic Inspection Intervals and Inspector Team Assignment</p>
+          <p style="font-size: 20px; font-weight: bold;">Indirect and direct grouping maintenance models for an hybrid policy under the delay-time model</p>
           <p style="font-size: 15px;">By: Victor H. R. Lima & Cristiano A. V. Cavalcante</p>
         </div>
         """, unsafe_allow_html=True)
