@@ -365,7 +365,7 @@ def main():
         st.write("<h6 style='text-align: justify; color: Blue Jay; padding-left: 40px;'>If two or more actions are specified, inspections occur as per the sequence provided.</h6>", unsafe_allow_html=True)
 
         st.write("<h6 style='text-align: justify; color: Blue Jay; padding-left: 20px;'>User Input:</h6>", unsafe_allow_html=True)
-        st.write("<h6 style='text-align: justify; color: Blue Jay; padding-left: 40px;'>Specify the sequence of actions for each component, separated by spaces.</h6>", unsafe_allow_html=True)
+        st.write("<h6 style='text-align: justify; color: Blue Jay; padding-left: 40px;'>Specify the sequence of the moments to perform actions for each component, separated by spaces.</h6>", unsafe_allow_html=True)
         st.write("<h6 style='text-align: justify; color: Blue Jay; padding-left: 40px;'>Actions occurring at the same time are grouped to share setup costs.</h6>", unsafe_allow_html=True)
 
         st.write("<h6 style='text-align: justify; color: Blue Jay; padding-left: 20px;'>Cost Calculations:</h6>", unsafe_allow_html=True)
