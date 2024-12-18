@@ -91,7 +91,7 @@ def main():
         botao = st.button("Get cost-rate")
         if botao:
             st.write("---RESULT---")
-            st.write("Cost-rate", print(Solutions))
+            st.write("Cost-rate", Solutions)
             
     if choice == menu[1]:
         st.header(menu[1])
