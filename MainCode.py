@@ -80,8 +80,9 @@ def main():
             Cis.append(col.number_input(f"Inspection Cost", min_value=0.0, value=0.05, key=f"C^I_{i}", help="This parameter represents the cost of conducting an inspection on component i."))
             Crs.append(col.number_input(f"Replacement Cost", min_value=0.0, value=1.0, key=f"C^R_{i}", help="This parameter represents the cost of conducting a replacement (during inspection or at the age-based action) on component i."))
             Cfs.append(col.number_input(f"Failure Cost", min_value=0.0, value=10.0, key=f"C^F_{i}", help="This parameter represents the cost of conducting a replacement during the failure on component i."))
-
-        
+            
+        Si=st.number_input("Insert the setup cost for an inspection", min_value = 0.0, value = 0.07, help="This parameter specifies the common cost for all components when one or more inspections are carried out.")
+        Sr=st.number_input("Insert the setup cost for an replacement", min_value = 0.0, value = 0.7, help="This parameter specifies the common cost for all components when one or more replacements are carried out (preventively or correctively).")
         
         st.subheader("Insert the policy:")
 
