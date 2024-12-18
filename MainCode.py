@@ -16,6 +16,151 @@ from scipy.integrate import quad #Single integral
 from scipy.integrate import dblquad
 from PIL import Image
 
+def JointCost_RateComputation(Solution,Ordering):
+    
+    def SingleCostRateComputation(Component,Actions,K,delta,T):
+        ############Defect arrival component 1#####################################
+        def f01(x):
+            return (Beta1/Eta1)*((x/Eta1)**(Beta1-1))*np.exp(-(x/Eta1)**Beta1)
+        ############Defect arrival component 2#####################################
+        def f02(x):#
+            return (Beta2/Eta2)*((x/Eta2)**(Beta2-1))*np.exp(-(x/Eta2)**Beta2)
+        ###########Mixture for defect arrival######################################
+        def fx(x):
+            return (p*f01(x))+((1-p)*f02(x))
+        ##########Delay-time distribution##########################################
+        def fh(h):
+            return (Beta3/Eta3)*((h/Eta3)**(Beta3-1))*np.exp(-(h/Eta3)**Beta3)
+        ##########Cumulative for defect arrival####################################
+        def Fx(x):
+            return (p*(1-np.exp(-(x/Eta1)**Beta1)))+((1-p)*(1-np.exp(-(x/Eta2)**Beta2)))
+        #########Reliability function for defect arrival###########################
+        def Rx(x):
+            return 1-Fx(x)
+        ##########Cumulative function delay-time###################################
+        def Fh(h):
+            return 1-np.exp(-(h/Eta3)**Beta3)
+        ##########Reliability function delay-time##################################
+        def Rh(h):
+            return np.exp(-(h/Eta3)**Beta3)
+        
+        if isinstance(delta, np.ndarray):
+            delta=delta.tolist()
+        delta.insert(0,0)
+        ###########################################################################
+        Eta1=Eta1s[Component]
+        Eta2=Eta2s[Component]
+        Beta1=Beta1s[Component]
+        Beta2=Beta2s[Component]
+        Eta3=Eta3s[Component]
+        Beta3=Beta3s[Component]
+        p=ps[Component]
+        Ci=Cis[Component]
+        Cr=Crs[Component]
+        Cf=Cfs[Component]
+        ############Scenario 1: Defect arrival and failure between inspections#####
+        def C1():
+            Setup=[0]*len(Actions)
+            PROB1=0
+            EC1=0
+            EL1=0
+            for i in range(0, K):
+                PROB1+=dblquad(lambda h, x: fx(x)*fh(h), delta[i], (delta[i+1]),0,lambda x:(delta[i+1])-x)[0]
+                EL1+=dblquad(lambda h, x: (x+h)*fx(x)*fh(h), delta[i], (delta[i+1]),0,lambda x:(delta[i+1])-x)[0]
+                EC1+=(i*(Ci+Si)+Cf+Sr)*dblquad(lambda h, x: fx(x)*fh(h), delta[i], (delta[i+1]),0,lambda x:(delta[i+1])-x)[0]
+                for j in range(0,len(Actions),1):
+                    if (i>Actions[j]):
+                        Setup[j]+=Si*dblquad(lambda h, x: fx(x)*fh(h), delta[i], (delta[i+1]),0,lambda x:(delta[i+1])-x)[0]
+            return PROB1,EC1,EL1,Setup
+        
+        ############Scenario 2: Defect arrival and surviving until next inspection without error at inspection####
+        def C2():
+            Setup=[0]*len(Actions)
+            PROB2=0
+            EC2=0
+            EL2=0
+            for i in range(0, K):
+                PROB2+=quad(lambda x: fx(x)*(1-Fh((delta[i+1])-x)),delta[i], (delta[i+1]))[0]
+                EC2+=((i+1)*(Ci+Si)+Cr+Sr)*quad(lambda x: fx(x)*(1-Fh((delta[i+1])-x)),delta[i], (delta[i+1]))[0]
+                EL2+=(delta[i+1])*quad(lambda x: fx(x)*(1-Fh((delta[i+1])-x)),delta[i], (delta[i+1]))[0]
+                for j in range(0,len(Actions),1):
+                    if (i>=Actions[j]):
+                        if (i==Actions[j]):
+                            Setup[j]+=(Si+Sr)*quad(lambda x: fx(x)*(1-Fh((delta[i+1])-x)),delta[i], (delta[i+1]))[0]
+                        else:
+                            Setup[j]+=Si*quad(lambda x: fx(x)*(1-Fh((delta[i+1])-x)),delta[i], (delta[i+1]))[0]
+            return PROB2,EC2,EL2,Setup
+        
+        ##########Scenario 3: Defect arrival after inspections and failure#########
+        def C3():
+            Setup=[0]*len(Actions)
+            PROB3=dblquad(lambda h, x: fx(x)*fh(h), delta[K], T,0,lambda x:T-x)[0]
+            EC3=(K*(Ci+Si)+Cf+Sr)*PROB3
+            EL3=dblquad(lambda h, x: (x+h)*fx(x)*fh(h), delta[K], T,0,lambda x:T-x)[0]
+            for j in range(0,len(Actions),1):
+                if (Actions[j]<K): #If it is an inspection
+                    Setup[j]+=Si*dblquad(lambda h, x: fx(x)*fh(h), delta[K], T,0,lambda x:T-x)[0]
+            return PROB3,EC3,EL3,Setup
+        
+        ###########Scenario 4: Defect arrival after inspections and preventive at T####
+        def C4():
+            Setup=[0]*len(Actions)
+            PROB4=quad(lambda x: fx(x)*(1-Fh(T-x)),delta[K],T)[0]
+            EC4=(K*(Ci+Si)+Cr+Sr)*PROB4
+            EL4=T*PROB4
+            for j in range(0,len(Actions),1):
+                if (Actions[j]==K):
+                    Setup[j]+=Sr*quad(lambda x: fx(x)*(1-Fh(T-x)),delta[K],T)[0]
+                else:
+                    Setup[j]+=Si*quad(lambda x: fx(x)*(1-Fh(T-x)),delta[K],T)[0]
+            return PROB4,EC4,EL4,Setup
+        
+        ##########Scenario 5: No defect arrival####################################
+        def C5():
+            Setup=[0]*len(Actions)
+            PROB5=Rx(T)
+            EC5=(K*(Ci+Si)+Cr+Sr)*PROB5
+            EL5=T*PROB5
+            for j in range(0,len(Actions),1):
+                if (Actions[j]==K):
+                    Setup[j]+=Sr*Rx(T)
+                else:
+                    Setup[j]+=Si*Rx(T)
+            return PROB5,EC5,EL5,Setup
+        ###########################################################################
+        C1=C1()
+        C2=C2()
+        C3=C3()
+        C4=C4()
+        C5=C5()
+        ########Defining cost and life based on previous scenarios#################
+        TOTAL_EC=C1[1]+C2[1]+C3[1]+C4[1]+C5[1]
+        TOTAL_EL=C1[2]+C2[2]+C3[2]+C4[2]+C5[2]
+        Setup=[sum(values) for values in zip(C1[3],C2[3],C3[3],C4[3],C5[3])]
+        for i in range(0,len(Setup),1):
+            Setup[i]/=TOTAL_EL
+        return TOTAL_EC/TOTAL_EL,Setup
+    
+    Setups=[]
+    CRs=0
+    Savings=0
+    for i in range(0,len(Solutions),1):
+        Actions=[]
+        for j in range(0,len(Solutions[i]),1):
+            Actions.append(j)
+        CR,Stps=SingleCostRateComputation(i, Actions, len(Solutions[i])-1, Solutions[i][:-1], Solutions[i][-1])
+        CRs+=CR
+        Setups.append(Stps)
+    for i in range(0,len(Solution),1):
+        if (len(Solution[i])>1):
+            Costs=[]
+            for j in range(0,len(Solution[i]),1):
+                Costs.append(Setups[Ordering[Solution[i][j]][0]][Ordering[Solution[i][j]][1]])
+            for j in range(0,len(Costs),1):
+                if (max(Costs)!=Costs[j]):
+                    Savings+=Costs[j]
+    return CRs,Savings
+
 def main():
     #criando 3 colunas
     col1, col2, col3= st.columns(3)
@@ -90,10 +235,37 @@ def main():
                 Solutions.append(moments_list)
         
         st.subheader("Click on botton below to run this application:")    
-        botao = st.button("Get cost-rate")
+        botao = st.button("Get cost-rate and cost savings")
         if botao:
+            Ordering=[]
+            for i in range(0,len(Solutions),1):
+                for j in range(0,len(Solutions[i]),1):
+                    Ordering.append((i,j))
+            
+            SolutionsFlat=[item for sublist in Solutions for item in sublist]
+            Index=[]
+            for i in range(0,len(Ordering),1):
+                Index.append(i)
+            
+            Solution=[]
+            i=0
+            while (i<len(SolutionsFlat)):
+                Group=[Index[i]]
+                j=i+1
+                while (j<len(SolutionsFlat)):
+                    if (SolutionsFlat[j]==SolutionsFlat[i]):
+                        Group.append(Index[j])
+                        Index.pop(j)
+                        SolutionsFlat.pop(j)
+                    else:
+                        j+=1
+                Solution.append(Group)
+                i+=1
+                
+            CostRates,Savs=JointCost_RateComputation(Solution, Ordering)
+            Savs=(Savs/CostRates)*100
             st.write("---RESULT---")
-            st.write("Cost-rate", Solutions)
+            st.write("Cost-rate", CostRates, "cost saving", Savs,"%")
             
     if choice == menu[1]:
         st.header(menu[1])
