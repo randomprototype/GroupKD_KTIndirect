@@ -262,7 +262,7 @@ def main():
                 Solution.append(Group)
                 i+=1
                 
-            CostRates,Savs=JointCost_RateComputation(Solutions, Solution, Ordering)
+            CostRates,Savs=JointCost_RateComputation(Solutions, Solution, Ordering, Eta1s, Eta2s, Beta1s, Beta2s, ps, Cis, Crs, Cfs)
             Savs=(Savs/CostRates)*100
             st.write("---RESULT---")
             st.write("Cost-rate", CostRates, "cost saving", Ordering,"%")
