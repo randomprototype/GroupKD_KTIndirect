@@ -73,8 +73,10 @@ def main():
             Eta1s.append(col.number_input(f"\u03B7¹", min_value=0.0, value=3.0, key=f"Eta1_{i}", help="This parameter represents the characteristic life of the defect arrival for weak component i."))
             Beta1s.append(col.number_input(f"\u03B2¹", min_value=1.0, max_value=5.0, value=3.0, key=f"Beta1_{i}", help="This parameter represents the shape parameter of the defect arrival for weak component i."))
             Eta2s.append(col.number_input(f"\u03B7²", min_value=0.0, value=18.0, key=f"Eta2_{i}", help="This parameter represents the characteristic life of the defect arrival for strong component i."))
-            Beta2s.append(col.number_input(f"\u03B2¹", min_value=1.0, max_value=5.0, value=3.0, key=f"Beta2_{i}", help="This parameter represents the shape parameter of the defect arrival for strong component i."))
-            
+            Beta2s.append(col.number_input(f"\u03B2²", min_value=1.0, max_value=5.0, value=3.0, key=f"Beta2_{i}", help="This parameter represents the shape parameter of the defect arrival for strong component i."))
+            ps.append(col.number_input(f"p", min_value=0.0, max_value=1.0, value=0.1, key=f"p_{i}", help="This parameter represents the mixture between weak and strong spare parts for component i."))
+            Eta3s.append(col.number_input(f"\u03B7³", min_value=0.0, value=2.0, key=f"Eta3_{i}", help="This parameter represents the characteristic life of the delay-time for component i."))
+            Beta3s.append(col.number_input(f"\u03B2³", min_value=1.0, max_value=5.0, value=3.0, key=f"Beta3_{i}", help="This parameter represents the shape parameter of the delay-time for component i."))
             Cis.append(col.number_input(f"Inspection Cost", min_value=0.0, value=0.05, key=f"C^I_{i}", help="This parameter represents the cost of conducting an inspection on component i."))
             Crs.append(col.number_input(f"Replacement Cost", min_value=0.0, value=1.0, key=f"C^R_{i}", help="This parameter represents the cost of conducting a replacement (during inspection or at the age-based action) on component i."))
             Cfs.append(col.number_input(f"Failure Cost", min_value=0.0, value=10.0, key=f"C^F_{i}", help="This parameter represents the cost of conducting a replacement during the failure on component i."))
