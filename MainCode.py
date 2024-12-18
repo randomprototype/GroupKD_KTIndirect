@@ -49,6 +49,13 @@ def main():
         Cis=[]
         Cfs=[]
         st.header(menu[0])
+        if 'num_columns' not in st.session_state:
+            st.session_state.num_columns = 2
+        def add_column():
+            st.session_state.num_columns += 1
+        def remove_column():
+            if st.session_state.num_columns > 1:
+                st.session_state.num_columns -= 1
         
         col1, col2 = st.columns(2)
 
