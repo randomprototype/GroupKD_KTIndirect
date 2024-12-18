@@ -262,10 +262,10 @@ def main():
                 Solution.append(Group)
                 i+=1
                 
-            CostRates,Savs=JointCost_RateComputation(Solution, Ordering)
-            Savs=(Savs/CostRates)*100
+            #CostRates,Savs=JointCost_RateComputation(Solution, Ordering)
+            #Savs=(Savs/CostRates)*100
             st.write("---RESULT---")
-            st.write("Cost-rate", CostRates, "cost saving", Savs,"%")
+            st.write("Cost-rate", Solutions, "cost saving", Ordering,"%")
             
     if choice == menu[1]:
         st.header(menu[1])
