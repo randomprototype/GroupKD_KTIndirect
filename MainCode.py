@@ -49,23 +49,28 @@ def main():
         Cis=[]
         Cfs=[]
         st.header(menu[0])
-        M=st.number_input("Insert the number of components:", min_value = 2, max_value=5, value = 2, help="The number of components must belong to the interval from 2 and 5. If this does not fulfill your need, contact us.")
         
-        columns = st.columns(M)  # Cria M colunas
+        col1, col2 = st.columns(2)
+
+        # Botões com balões informativos, cada um em uma coluna
+        with col1:
+            st.button("Add Repairperson", on_click=add_column, help="You should add columns to the parameters of the repairperson as you want (each column is related to one repairperson).")
         
+        with col2:
+            st.button("Remove Repairperson", on_click=remove_column)
+
+        FixedCosts=[]
+        Ci=[]
+        Alpha=[]
+        Beta=[]
+        columns = st.columns(st.session_state.num_columns)
+
         for i, col in enumerate(columns):
-            col.subheader(f"Component {i + 1}")  # Título para a coluna
-            Eta1s.append(col.number_input(f"Eta1 (Comp {i + 1})", key=f"eta1_{i}"))
-            Beta1s.append(col.number_input(f"Beta1 (Comp {i + 1})", key=f"beta1_{i}"))
-            Eta2s.append(col.number_input(f"Eta2 (Comp {i + 1})", key=f"eta2_{i}"))
-            Beta2s.append(col.number_input(f"Beta2 (Comp {i + 1})", key=f"beta2_{i}"))
-            ps.append(col.number_input(f"p (Comp {i + 1})", key=f"p_{i}"))
-            Eta3s.append(col.number_input(f"Eta3 (Comp {i + 1})", key=f"eta3_{i}"))
-            Beta3s.append(col.number_input(f"Beta3 (Comp {i + 1})", key=f"beta3_{i}"))
-            Crs.append(col.number_input(f"Cr (Comp {i + 1})", key=f"cr_{i}"))
-            Cis.append(col.number_input(f"Ci (Comp {i + 1})", key=f"ci_{i}"))
-            Cfs.append(col.number_input(f"Cf (Comp {i + 1})", key=f"cf_{i}"))
-        
+            col.write(f"**Inspector {i+1}:**") 
+            FixedCosts.append(col.number_input(f"Fixed Cost (C\u02b0)", min_value=0.0, value=0.1, key=f"FixedCosts_{i}", help="This parameter defines the cost related to the hiring of the repairperson."))
+            Ci.append(col.number_input(f"Inspection Cost (C\u2071)", min_value=0.0, value=0.15, key=f"Ci_{i}", help="This parameter represents the cost of conducting a single inspection by this repairperson."))
+            Alpha.append(col.number_input(f"False-Positive Percentage (α)", min_value=0.0, value=0.1, key=f"Alpha_{i}", help="This parameter defines the probability that, during an inspection, the repairperson will incorrectly classify a component as defective when it is actually not."))
+            Beta.append(col.number_input(f"False-Negative Percentage (ε)", min_value=0.0, value=0.05, key=f"Beta_{i}", help="This parameter defines the probability that, during an inspection, the repairperson will incorrectly classify a component as good when it is actually defective."))
         st.subheader("Insert the parameter values below:")
         
         col1, col2 = st.columns(2)
