@@ -86,7 +86,7 @@ def main():
         st.subheader("Insert the policy:")
 
         for i, col in enumerate(columns):
-            action_moments = st.text_input("Insert the moments of the actions", help="This parameter specifies the moments of the actions as a string. For example, you can enter values separated by commas like '1.0, 2.0, 3.5'.")
+            Cfs.append(col.number_input(f"Failure Cost", min_value=0.0, value=10.0, key=f"C^F_{i}", help="This parameter represents the cost of conducting a replacement during the failure on component i."))
         
         st.subheader("Click on botton below to run this application:")    
         botao = st.button("Get cost-rate")
