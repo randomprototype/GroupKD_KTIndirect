@@ -85,7 +85,7 @@ def main():
             Cfs.append(col.number_input(f"Failure Cost", min_value=0.0, value=10.0, key=f"C^F_{i}", help="This parameter represents the cost of conducting a replacement during the failure on component i."))
             moments_input=col.text_input(f"Insert moments for component {i+1}:", key=f"moments_{i}", help="Enter the moments of actions, with at least one moment of action, according to the characteristics of the policy.")
             if moments_input:
-                Solutions=[float(x.strip()) for x in moments_input.split(',')]
+                Solutions=[float(x.strip()) for x in moments_input.split(' ')]
         
         st.subheader("Click on botton below to run this application:")    
         botao = st.button("Get cost-rate")
