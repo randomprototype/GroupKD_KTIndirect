@@ -38,6 +38,22 @@ def main():
     choice = st.sidebar.selectbox("Select here", menu)
     
     if choice == menu[0]:
+        st.header(menu[0])
+        if 'num_columns' not in st.session_state:
+            st.session_state.num_columns = 2
+        def add_column():
+            st.session_state.num_columns += 1
+        def remove_column():
+            if st.session_state.num_columns > 2:
+                st.session_state.num_columns -= 1
+    
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.button("Add Component", on_click=add_column, help="You should add columns to the parameters of the repairperson as you want (each column is related to one repairperson).")
+        with col2:
+            st.button("Remove Component", on_click=remove_column)
+
         Eta1s=[]
         Beta1s=[]
         Eta2s=[]
@@ -48,38 +64,23 @@ def main():
         Crs=[]
         Cis=[]
         Cfs=[]
-        st.header(menu[0])
-        if 'num_columns' not in st.session_state:
-            st.session_state.num_columns = 2
-        def add_column():
-            st.session_state.num_columns += 1
-        def remove_column():
-            if st.session_state.num_columns > 1:
-                st.session_state.num_columns -= 1
-        
-        col1, col2 = st.columns(2)
-
-        # Botões com balões informativos, cada um em uma coluna
-        with col1:
-            st.button("Add Repairperson", on_click=add_column, help="You should add columns to the parameters of the repairperson as you want (each column is related to one repairperson).")
-        
-        with col2:
-            st.button("Remove Repairperson", on_click=remove_column)
-
-        FixedCosts=[]
-        Ci=[]
-        Alpha=[]
-        Beta=[]
         columns = st.columns(st.session_state.num_columns)
 
-        for i, col in enumerate(columns):
-            col.write(f"**Inspector {i+1}:**") 
-            FixedCosts.append(col.number_input(f"Fixed Cost (C\u02b0)", min_value=0.0, value=0.1, key=f"FixedCosts_{i}", help="This parameter defines the cost related to the hiring of the repairperson."))
-            Ci.append(col.number_input(f"Inspection Cost (C\u2071)", min_value=0.0, value=0.15, key=f"Ci_{i}", help="This parameter represents the cost of conducting a single inspection by this repairperson."))
-            Alpha.append(col.number_input(f"False-Positive Percentage (α)", min_value=0.0, value=0.1, key=f"Alpha_{i}", help="This parameter defines the probability that, during an inspection, the repairperson will incorrectly classify a component as defective when it is actually not."))
-            Beta.append(col.number_input(f"False-Negative Percentage (ε)", min_value=0.0, value=0.05, key=f"Beta_{i}", help="This parameter defines the probability that, during an inspection, the repairperson will incorrectly classify a component as good when it is actually defective."))
         st.subheader("Insert the parameter values below:")
-        
+
+        for i, col in enumerate(columns):
+            col.write(f"**Component {i+1}:**")
+            Eta1s.append(col.number_input(f"Characteristic life of the weak component (η\u2081)", min_value=0.0, value=3, key=f"(η\u2081)_{i}", help="This parameter defines the cost related to the hiring of the repairperson."))
+            Beta1s.append(col.number_input(f"Fixed Cost (C\u02b0)", min_value=0.0, value=0.1, key=f"FixedCosts_{i}", help="This parameter defines the cost related to the hiring of the repairperson."))
+            Eta2s.append(col.number_input(f"Fixed Cost (C\u02b0)", min_value=0.0, value=0.1, key=f"FixedCosts_{i}", help="This parameter defines the cost related to the hiring of the repairperson."))
+            Beta2s.append(col.number_input(f"Fixed Cost (C\u02b0)", min_value=0.0, value=0.1, key=f"FixedCosts_{i}", help="This parameter defines the cost related to the hiring of the repairperson."))
+            ps.append(col.number_input(f"Fixed Cost (C\u02b0)", min_value=0.0, value=0.1, key=f"FixedCosts_{i}", help="This parameter defines the cost related to the hiring of the repairperson."))
+            Eta3s.append(col.number_input(f"Fixed Cost (C\u02b0)", min_value=0.0, value=0.1, key=f"FixedCosts_{i}", help="This parameter defines the cost related to the hiring of the repairperson."))
+            Beta3s.append(col.number_input(f"Fixed Cost (C\u02b0)", min_value=0.0, value=0.1, key=f"FixedCosts_{i}", help="This parameter defines the cost related to the hiring of the repairperson."))
+            Cis.append(col.number_input(f"Inspection Cost (C\u2071)", min_value=0.0, value=0.05, key=f"C^I_{i}", help="This parameter represents the cost of conducting an inspection on component i."))
+            Crs.append(col.number_input(f"Replacement Cost (C\u2071)", min_value=0.0, value=1.0, key=f"C^R_{i}", help="This parameter represents the cost of conducting a replacement (during inspection or at the age-based action) on component i."))
+            Cfs.append(col.number_input(f"Failure Cost (C\u2071)", min_value=0.0, value=10.0, key=f"C^F_{i}", help="This parameter represents the cost of conducting a replacement during the failure on component i."))
+            
         col1, col2 = st.columns(2)
         
         st.subheader("Click on botton below to run this application:")    
