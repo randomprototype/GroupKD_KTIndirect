@@ -86,7 +86,7 @@ def main():
         st.subheader("Insert the policy:")
 
         for i, col in enumerate(columns):
-            st.number_input("Insert the moments of the actions", help="This parameter specifies the scale parameter for the Weibull distribution, representing the defect arrival for the weaker component.")
+            action_moments = st.text_input("Insert the moments of the actions", help="This parameter specifies the moments of the actions as a string. For example, you can enter values separated by commas like '1.0, 2.0, 3.5'.")
         
         st.subheader("Click on botton below to run this application:")    
         botao = st.button("Get cost-rate")
