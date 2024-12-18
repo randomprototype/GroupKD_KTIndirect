@@ -16,7 +16,7 @@ from scipy.integrate import quad #Single integral
 from scipy.integrate import dblquad
 from PIL import Image
 
-def JointCost_RateComputation(Solution,Ordering):
+def JointCost_RateComputation(Solutions,Solution,Ordering):
     
     def SingleCostRateComputation(Component,Actions,K,delta,T):
         ############Defect arrival component 1#####################################
@@ -262,8 +262,8 @@ def main():
                 Solution.append(Group)
                 i+=1
                 
-            #CostRates,Savs=JointCost_RateComputation(Solution, Ordering)
-            #Savs=(Savs/CostRates)*100
+            CostRates,Savs=JointCost_RateComputation(Solutions, Solution, Ordering)
+            Savs=(Savs/CostRates)*100
             st.write("---RESULT---")
             st.write("Cost-rate", Solution, "cost saving", Ordering,"%")
             
