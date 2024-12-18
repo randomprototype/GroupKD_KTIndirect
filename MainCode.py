@@ -53,7 +53,7 @@ def main():
         Cfs=[]
         st.subheader("Insert the parameter values below:")
         
-        for i, col in enumerate(M):
+        for i, col in M:
             Eta1s.append(st.number_input("Insert the characteristic life of the weak component (η\u2081)", min_value = 0.0, value = 3.0, help="This parameter specifies the scale parameter for the Weibull distribution, representing the defect arrival for the weaker component."))
             Beta1s.append(st.number_input("Insert the shape parameter of the weak component (β\u2082)", min_value = 1.0, max_value=5.0, value = 2.5, help="This parameter specifies the shape parameter for the Weibull distribution, representing the defect arrival for the weaker component."))
             Eta2s.append(st.number_input("Insert the characteristic life of the strong component (η\u2081)", min_value = 3.0, value = 18.0, help="This parameter specifies the scale parameter for the Weibull distribution, representing the defect arrival for the stronger component."))
