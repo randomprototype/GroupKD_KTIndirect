@@ -83,7 +83,7 @@ def main():
             Cis.append(col.number_input(f"Inspection Cost", min_value=0.0, value=0.05, key=f"C^I_{i}", help="This parameter represents the cost of conducting an inspection on component i."))
             Crs.append(col.number_input(f"Replacement Cost", min_value=0.0, value=1.0, key=f"C^R_{i}", help="This parameter represents the cost of conducting a replacement (during inspection or at the age-based action) on component i."))
             Cfs.append(col.number_input(f"Failure Cost", min_value=0.0, value=10.0, key=f"C^F_{i}", help="This parameter represents the cost of conducting a replacement during the failure on component i."))
-            moments_input=col.text_input(f"Insert moments for component {i+1}:", key=f"moments_{i}", help="Enter the moments of actions, with at least one moment of action, according to the characteristics of the policy.")
+            moments_input=col.text_input(f"Insert moments for component {i+1}:", value='1 2 4 8',key=f"moments_{i}", help="Enter the moments of actions, with at least one moment of action, according to the characteristics of the policy.")
             if moments_input:
                 Solutions=[float(x.strip()) for x in moments_input.split(',')]
         
@@ -91,7 +91,7 @@ def main():
         botao = st.button("Get cost-rate")
         if botao:
             st.write("---RESULT---")
-            st.write("Cost-rate", 0)
+            st.write("Cost-rate", print(Solutions))
             
     if choice == menu[1]:
         st.header(menu[1])
