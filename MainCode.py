@@ -83,18 +83,10 @@ def main():
             Cis.append(col.number_input(f"Inspection Cost", min_value=0.0, value=0.05, key=f"C^I_{i}", help="This parameter represents the cost of conducting an inspection on component i."))
             Crs.append(col.number_input(f"Replacement Cost", min_value=0.0, value=1.0, key=f"C^R_{i}", help="This parameter represents the cost of conducting a replacement (during inspection or at the age-based action) on component i."))
             Cfs.append(col.number_input(f"Failure Cost", min_value=0.0, value=10.0, key=f"C^F_{i}", help="This parameter represents the cost of conducting a replacement during the failure on component i."))
-        
-        # Adiciona a subheader "Insert the policy" após a coleta dos parâmetros
-        st.subheader("Insert the policy:")
-        
-        # Coleta dos momentos de ação para cada componente após a subheader
-        for i, col in enumerate(columns):
-            moments_input = col.text_input(f"Insert moments for component {i+1}:", key=f"moments_{i}", help="Enter the moments of actions as a comma-separated list.")
-            
-            # Salvando os momentos de ação para cada componente
+            moments_input=col.text_input(f"Insert moments for component {i+1}:", key=f"moments_{i}", help="Enter the moments of actions, with at least one moment of action, according to the characteristics of the policy.")
             if moments_input:
-                moments_list = [float(x.strip()) for x in moments_input.split(',')]  # Converte para lista de números
-                st.write(f"Moments for component {i+1}: {moments_list}")
+                Solutions=[float(x.strip()) for x in moments_input.split(',')]
+        
         st.subheader("Click on botton below to run this application:")    
         botao = st.button("Get cost-rate")
         if botao:
