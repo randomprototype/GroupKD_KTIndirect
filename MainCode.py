@@ -70,7 +70,8 @@ def main():
 
         for i, col in enumerate(columns):
             col.write(f"**Component {i+1}:**")
-            Eta1s.append(col.number_input(f"\u03B7¹", min_value=0.0, value=3.0, key=f"C^I_{i}", help="This parameter represents the characteristic life of the defect arrival for weak component i."))
+            Eta1s.append(col.number_input(f"\u03B7¹", min_value=0.0, value=3.0, help="This parameter represents the characteristic life of the defect arrival for weak component i."))
+            Beta1s.append(col.number_input(f"\u03B2¹", min_value=1.0, ,max_value=5.0, value=3.0, help="This parameter represents the shape parameter of the defect arrival for weak component i."))
             Cis.append(col.number_input(f"Inspection Cost", min_value=0.0, value=0.05, key=f"C^I_{i}", help="This parameter represents the cost of conducting an inspection on component i."))
             Crs.append(col.number_input(f"Replacement Cost", min_value=0.0, value=1.0, key=f"C^R_{i}", help="This parameter represents the cost of conducting a replacement (during inspection or at the age-based action) on component i."))
             Cfs.append(col.number_input(f"Failure Cost", min_value=0.0, value=10.0, key=f"C^F_{i}", help="This parameter represents the cost of conducting a replacement during the failure on component i."))
