@@ -84,14 +84,17 @@ def main():
         Si=st.number_input("Insert the setup cost for an inspection", min_value = 0.0, value = 0.07, help="This parameter specifies the common cost for all components when one or more inspections are carried out.")
         Sr=st.number_input("Insert the setup cost for an replacement", min_value = 0.0, value = 0.7, help="This parameter specifies the common cost for all components when one or more replacements are carried out (preventively or correctively).")
         
+        # Adiciona a subheader "Insert the policy" após a coleta dos parâmetros
         st.subheader("Insert the policy:")
         
+        # Coleta dos momentos de ação para cada componente após a subheader
         for i, col in enumerate(columns):
             moments_input = col.text_input(f"Insert moments for component {i+1}:", key=f"moments_{i}", help="Enter the moments of actions as a comma-separated list.")
+            
+            # Salvando os momentos de ação para cada componente
             if moments_input:
                 moments_list = [float(x.strip()) for x in moments_input.split(',')]  # Converte para lista de números
                 st.write(f"Moments for component {i+1}: {moments_list}")
-        
         st.subheader("Click on botton below to run this application:")    
         botao = st.button("Get cost-rate")
         if botao:
