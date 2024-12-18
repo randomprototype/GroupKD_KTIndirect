@@ -51,6 +51,21 @@ def main():
         st.header(menu[0])
         M=st.number_input("Insert the number of components:", min_value = 2, max_value=5, value = 2, help="The number of components must belong to the interval from 2 and 5. If this does not fulfill your need, contact us.")
         
+        columns = st.columns(M)  # Cria M colunas
+        
+        for i, col in enumerate(columns):
+            col.subheader(f"Component {i + 1}")  # Título para a coluna
+            Eta1s.append(col.number_input(f"Eta1 (Comp {i + 1})", key=f"eta1_{i}"))
+            Beta1s.append(col.number_input(f"Beta1 (Comp {i + 1})", key=f"beta1_{i}"))
+            Eta2s.append(col.number_input(f"Eta2 (Comp {i + 1})", key=f"eta2_{i}"))
+            Beta2s.append(col.number_input(f"Beta2 (Comp {i + 1})", key=f"beta2_{i}"))
+            ps.append(col.number_input(f"p (Comp {i + 1})", key=f"p_{i}"))
+            Eta3s.append(col.number_input(f"Eta3 (Comp {i + 1})", key=f"eta3_{i}"))
+            Beta3s.append(col.number_input(f"Beta3 (Comp {i + 1})", key=f"beta3_{i}"))
+            Crs.append(col.number_input(f"Cr (Comp {i + 1})", key=f"cr_{i}"))
+            Cis.append(col.number_input(f"Ci (Comp {i + 1})", key=f"ci_{i}"))
+            Cfs.append(col.number_input(f"Cf (Comp {i + 1})", key=f"cf_{i}"))
+        
         st.subheader("Insert the parameter values below:")
         
         col1, col2 = st.columns(2)
