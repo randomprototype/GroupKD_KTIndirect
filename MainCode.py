@@ -85,9 +85,6 @@ def main():
 
         st.subheader("Insert the policy:")
 
-        for i, col in enumerate(columns):
-            Cfs.append(col.number_input(f"Failure Cost", min_value=0.0, value=10.0, key=f"C^F_{i}", help="This parameter represents the cost of conducting a replacement during the failure on component i."))
-        
         st.subheader("Click on botton below to run this application:")    
         botao = st.button("Get cost-rate")
         if botao:
