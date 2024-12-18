@@ -82,6 +82,8 @@ def main():
             Cfs.append(col.number_input(f"Failure Cost", min_value=0.0, value=10.0, key=f"C^F_{i}", help="This parameter represents the cost of conducting a replacement during the failure on component i."))
             
         col1, col2 = st.columns(2)
+
+        st.subheader("Insert the moments of each action:", help="")
         
         st.subheader("Click on botton below to run this application:")    
         botao = st.button("Get cost-rate")
