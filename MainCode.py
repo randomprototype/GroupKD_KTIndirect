@@ -46,7 +46,9 @@ def main():
         def remove_column():
             if st.session_state.num_columns > 2:
                 st.session_state.num_columns -= 1
-    
+
+        st.subheader("Insert the parameter values below:")
+        
         col1, col2 = st.columns(2)
 
         with col1:
@@ -65,8 +67,6 @@ def main():
         Cis=[]
         Cfs=[]
         columns = st.columns(st.session_state.num_columns)
-
-        st.subheader("Insert the parameter values below:")
 
         for i, col in enumerate(columns):
             col.write(f"**Component {i+1}:**")
