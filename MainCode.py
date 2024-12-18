@@ -265,7 +265,7 @@ def main():
             #CostRates,Savs=JointCost_RateComputation(Solution, Ordering)
             #Savs=(Savs/CostRates)*100
             st.write("---RESULT---")
-            st.write("Cost-rate", Solutions, "cost saving", Ordering,"%")
+            st.write("Cost-rate", Solution, "cost saving", Ordering,"%")
             
     if choice == menu[1]:
         st.header(menu[1])
