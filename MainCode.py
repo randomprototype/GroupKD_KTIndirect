@@ -50,18 +50,7 @@ def main():
         Cfs=[]
         st.header(menu[0])
         M=st.number_input("Insert the number of components:", min_value = 2, max_value=5, value = 2, help="The number of components must belong to the interval from 2 and 5. If this does not fulfill your need, contact us.")
-        columns = st.columns(M)
-        for i, col in enumerate(columns):
-            Eta1s.append(st.number_input("Insert the characteristic life of the weak component (η\u2081)", min_value = 0.0, value = 3.0, help="This parameter specifies the scale parameter for the Weibull distribution, representing the defect arrival for the weaker component."))
-            Beta1s.append(st.number_input("Insert the shape parameter of the weak component (β\u2082)", min_value = 1.0, max_value=5.0, value = 2.5, help="This parameter specifies the shape parameter for the Weibull distribution, representing the defect arrival for the weaker component."))
-            Eta2s.append(st.number_input("Insert the characteristic life of the strong component (η\u2081)", min_value = 3.0, value = 18.0, help="This parameter specifies the scale parameter for the Weibull distribution, representing the defect arrival for the stronger component."))
-            Beta2s.append(st.number_input("Insert the shape parameter of the strong component (β\u2082)", min_value = 1.0, max_value=5.0, value = 5.0, help="This parameter specifies the shape parameter for the Weibull distribution, representing the defect arrival for the stronger component."))
-            ps.append(st.number_input("Insert the mixture parameter (p)", min_value = 0.0, value = 0.10, help="This parameter indicates the proportion of the weaker component within the total population of components."))
-            Eta3s.append(st.number_input("Insert the characteristic life of the delay-time distribution (η\u2081)", min_value = 0.0, value = 2.0, help="This parameter defines the scale parameter for the Weibull distribution, which governs the transition from the defective to the failed state of a component."))
-            Beta3s.append(st.number_input("Insert the shape parameter of the delay-time distribution (β\u2082)", min_value = 1.0, max_value=5.0, value = 2.0, help="This parameter defines the shape parameter for the Weibull distribution, which governs the transition from the defective to the failed state of a component."))
-            Cis.append(st.number_input("Insert cost of inspection (C\u1da0)", value = 0.05, help="This parameter represents the inspection cost incurred."))
-            Crs.append(st.number_input("Insert cost of replacement (inspections and age-based) (C\u02b3)", value = 1.0, help="This parameter represents the cost associated with preventive replacements, whether performed during inspections or when the age-based threshold is reached."))
-            Cfs.append(st.number_input("Insert cost of failure (C\u1da0)", value = 10.0, help="This parameter represents the replacement cost incurred when a component fails."))
+        
         st.subheader("Insert the parameter values below:")
         
         col1, col2 = st.columns(2)
