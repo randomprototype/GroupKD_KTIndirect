@@ -80,10 +80,9 @@ def main():
             Cis.append(col.number_input(f"Inspection Cost", min_value=0.0, value=0.05, key=f"C^I_{i}", help="This parameter represents the cost of conducting an inspection on component i."))
             Crs.append(col.number_input(f"Replacement Cost", min_value=0.0, value=1.0, key=f"C^R_{i}", help="This parameter represents the cost of conducting a replacement (during inspection or at the age-based action) on component i."))
             Cfs.append(col.number_input(f"Failure Cost", min_value=0.0, value=10.0, key=f"C^F_{i}", help="This parameter represents the cost of conducting a replacement during the failure on component i."))
-            
+            st.subheader("Insert the policy:")
+        
         col1, col2 = st.columns(2)
-
-        st.subheader("Insert the policy:")
 
         st.subheader("Click on botton below to run this application:")    
         botao = st.button("Get cost-rate")
