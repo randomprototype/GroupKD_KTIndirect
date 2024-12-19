@@ -162,6 +162,7 @@ def JointCost_RateComputation(Solutions,Solution,Ordering):
     return CRs,Savings
 
 def main():
+    global Eta1s,Beta1s,Eta2s,Beta2s,Eta3s,Beta3s,ps,Cis,Crs,Cfs,Si,Sr
     #criando 3 colunas
     col1, col2, col3= st.columns(3)
     foto = Image.open('randomen.png')
@@ -262,10 +263,10 @@ def main():
                 Solution.append(Group)
                 i+=1
                 
-            CostRates,Savs=JointCost_RateComputation(Solutions, Solution, Ordering, Eta1s, Eta2s, Beta1s, Beta2s, ps, Cis, Crs, Cfs)
+            CostRates,Savs=JointCost_RateComputation(Solutions, Solution, Ordering)
             Savs=(Savs/CostRates)*100
             st.write("---RESULT---")
-            st.write("Cost-rate", CostRates, "cost saving", Ordering,"%")
+            st.write("Cost-rate", CostRates, "cost saving", Savs,"%")
             
     if choice == menu[1]:
         st.header(menu[1])
